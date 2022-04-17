@@ -161,15 +161,17 @@ fi
 # Permissions
 #
 
+# Add read permissions for everyone to all artifacts
+chmod -R a+r "$BUILD_PATH_FULL"
+chmod -R a+r "$UNITY_PROJECT_PATH"
+
 # Make a given user owner of all artifacts
 if [[ -n "$CHOWN_FILES_TO" ]]; then
   chown -R "$CHOWN_FILES_TO" "$BUILD_PATH_FULL"
   chown -R "$CHOWN_FILES_TO" "$UNITY_PROJECT_PATH"
+  chmod -R o+w "$BUILD_PATH_FULL"
+  chmod -R o+w "$UNITY_PROJECT_PATH"
 fi
-
-# Add read permissions for everyone to all artifacts
-chmod -R a+r "$BUILD_PATH_FULL"
-chmod -R a+r "$UNITY_PROJECT_PATH"
 
 # Add execute permissions to specific files
 if [[ "$BUILD_TARGET" == "StandaloneOSX" ]]; then
